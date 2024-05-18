@@ -3,8 +3,10 @@ package com.devira.anybuy
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -20,9 +22,24 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 NavHost(
                     navController = navController,
-                    startDestination = NavigationRoutes.WelcomeScreen.route
+                    startDestination = NavigationRoutes.WelcomeScreen.route,
+                    modifier = Modifier.fillMaxSize()
                 ) {
-                    composable(NavigationRoutes.WelcomeScreen.route) {
+                    composable(
+                        route = NavigationRoutes.WelcomeScreen.route,
+                        enterTransition = {
+                            slideIntoContainer(
+                                AnimatedContentTransitionScope.SlideDirection.Right,
+                                tween(600)
+                            )
+                        },
+                        exitTransition = {
+                            slideOutOfContainer(
+                                AnimatedContentTransitionScope.SlideDirection.Left,
+                                tween(600)
+                            )
+                        }
+                    ) {
                         WelcomeScreen(navigate = {
                             navController.navigate(route = NavigationRoutes.LoginScreen.route)
                         })
@@ -33,13 +50,5 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    AnybuyTheme {
-
     }
 }
