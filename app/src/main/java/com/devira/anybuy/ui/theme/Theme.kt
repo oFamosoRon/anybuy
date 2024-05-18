@@ -21,7 +21,8 @@ private val DarkColorScheme = darkColorScheme(
     tertiary = Orange,
     onPrimary = LightGray,
     onTertiary = White,
-    onSecondary = White
+    onSecondary = White,
+    surface = DarkRed
 )
 
 private val LightColorScheme = lightColorScheme(
@@ -30,7 +31,8 @@ private val LightColorScheme = lightColorScheme(
     tertiary = Orange,
     onPrimary = LightGray,
     onTertiary = White,
-    onSecondary = White
+    onSecondary = White,
+    surface = DarkRed
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),
@@ -46,8 +48,7 @@ private val LightColorScheme = lightColorScheme(
 @Composable
 fun AnybuyTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
@@ -63,7 +64,7 @@ fun AnybuyTheme(
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-            window.statusBarColor = colorScheme.primary.toArgb()
+            window.statusBarColor = colorScheme.secondary.toArgb()
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
         }
     }

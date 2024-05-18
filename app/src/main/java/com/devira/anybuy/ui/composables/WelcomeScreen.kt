@@ -24,7 +24,9 @@ import androidx.compose.ui.unit.dp
 import com.devira.anybuy.R
 
 @Composable
-fun LoginScreen() {
+fun WelcomeScreen(
+    navigate: () -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -56,7 +58,7 @@ fun LoginScreen() {
             verticalArrangement = Arrangement.Center
         ) {
             Button(
-                onClick = { /*TODO*/ },
+                onClick = { navigate() },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp)

@@ -9,6 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.devira.anybuy.ui.composables.LoginScreen
+import com.devira.anybuy.ui.composables.WelcomeScreen
 import com.devira.anybuy.ui.theme.AnybuyTheme
 
 class MainActivity : ComponentActivity() {
@@ -17,7 +18,15 @@ class MainActivity : ComponentActivity() {
         setContent {
             AnybuyTheme {
                 val navController = rememberNavController()
-                NavHost(navController = navController, startDestination = NavigationRoutes.LoginScreen.route) {
+                NavHost(
+                    navController = navController,
+                    startDestination = NavigationRoutes.WelcomeScreen.route
+                ) {
+                    composable(NavigationRoutes.WelcomeScreen.route) {
+                        WelcomeScreen(navigate = {
+                            navController.navigate(route = NavigationRoutes.LoginScreen.route)
+                        })
+                    }
                     composable(NavigationRoutes.LoginScreen.route) {
                         LoginScreen()
                     }
@@ -31,6 +40,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     AnybuyTheme {
-       
+
     }
 }
