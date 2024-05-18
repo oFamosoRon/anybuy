@@ -23,23 +23,21 @@ class MainActivity : ComponentActivity() {
                 NavHost(
                     navController = navController,
                     startDestination = NavigationRoutes.WelcomeScreen.route,
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier.fillMaxSize(),
+                    enterTransition = {
+                        slideIntoContainer(
+                            AnimatedContentTransitionScope.SlideDirection.Right,
+                            tween(600)
+                        )
+                    },
+                    exitTransition = {
+                        slideOutOfContainer(
+                            AnimatedContentTransitionScope.SlideDirection.Left,
+                            tween(600)
+                        )
+                    }
                 ) {
-                    composable(
-                        route = NavigationRoutes.WelcomeScreen.route,
-                        enterTransition = {
-                            slideIntoContainer(
-                                AnimatedContentTransitionScope.SlideDirection.Right,
-                                tween(600)
-                            )
-                        },
-                        exitTransition = {
-                            slideOutOfContainer(
-                                AnimatedContentTransitionScope.SlideDirection.Left,
-                                tween(600)
-                            )
-                        }
-                    ) {
+                    composable(route = NavigationRoutes.WelcomeScreen.route,) {
                         WelcomeScreen(navigate = {
                             navController.navigate(route = NavigationRoutes.LoginScreen.route)
                         })
