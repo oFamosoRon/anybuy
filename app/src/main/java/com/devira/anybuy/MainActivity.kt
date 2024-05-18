@@ -5,6 +5,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.devira.anybuy.ui.composables.LoginScreen
 import com.devira.anybuy.ui.theme.AnybuyTheme
 
 class MainActivity : ComponentActivity() {
@@ -12,13 +16,16 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AnybuyTheme {
-
+                val navController = rememberNavController()
+                NavHost(navController = navController, startDestination = NavigationRoutes.LoginScreen.route) {
+                    composable(NavigationRoutes.LoginScreen.route) {
+                        LoginScreen()
+                    }
+                }
             }
         }
     }
 }
-
-
 
 @Preview(showBackground = true)
 @Composable
