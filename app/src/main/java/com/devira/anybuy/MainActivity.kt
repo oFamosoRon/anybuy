@@ -60,7 +60,10 @@ class MainActivity : ComponentActivity() {
                         HomePagScreen()
                     }
                     composable(NavigationRoutes.SignUpScreen.route) {
-                        SignUpScreen()
+                        SignUpScreen(
+                            onNavigateBackClick = { navController.popBackStack() },
+                            onRegisterClick = { navController.navigate(NavigationRoutes.HomePageScreen.route) }
+                        )
                     }
                 }
             }
