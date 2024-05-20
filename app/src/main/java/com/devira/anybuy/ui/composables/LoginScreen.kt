@@ -3,7 +3,10 @@ package com.devira.anybuy.ui.composables
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -12,10 +15,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
@@ -41,7 +48,8 @@ import com.devira.anybuy.R
 @Composable
 fun LoginScreen(
     onForgotPasswordClick: () -> Unit,
-    onLoginClick: () -> Unit
+    onLoginClick: () -> Unit,
+    onNavigateBack: () -> Unit
 ) {
 
     var email by rememberSaveable { mutableStateOf("") }
@@ -54,11 +62,41 @@ fun LoginScreen(
             .background(MaterialTheme.colorScheme.primary)
             .padding(16.dp)
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.sign_in_png),
-            contentDescription = "any buy sign in logo",
-            modifier = Modifier.size(270.dp)
-        )
+        Box(
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            Box(
+                modifier = Modifier
+                    .clip(CircleShape)
+                    .size(50.dp)
+                    .background(Color.White)
+                    .border(
+                        width = 1.dp,
+                        color = MaterialTheme.colorScheme.tertiaryContainer,
+                        shape = CircleShape
+                    )
+                    .align(Alignment.TopStart)
+                    .clickable {
+                        onNavigateBack()
+                    },
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    Icons.Default.ArrowBack,
+                    contentDescription = "navigate back",
+                    modifier = Modifier.align(
+                        Alignment.Center
+                    )
+                )
+            }
+            Image(
+                painter = painterResource(id = R.drawable.sign_in_png),
+                contentDescription = "any buy sign in logo",
+                modifier = Modifier
+                    .size(270.dp)
+                    .align(Alignment.Center)
+            )
+        }
         Spacer(modifier = Modifier.padding(16.dp))
         TextField(
             value = email,

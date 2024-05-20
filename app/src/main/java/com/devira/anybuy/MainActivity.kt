@@ -47,7 +47,8 @@ class MainActivity : ComponentActivity() {
                     composable(NavigationRoutes.LoginScreen.route) {
                         LoginScreen(
                             onForgotPasswordClick = { navController.navigate(route = NavigationRoutes.ForgotPasswordScreen.route) },
-                            onLoginClick = { navController.navigate(route = NavigationRoutes.HomePageScreen.route) }
+                            onLoginClick = { navController.navigate(route = NavigationRoutes.HomePageScreen.route) },
+                            onNavigateBack = { navController.popBackStack() }
                         )
                     }
                     composable(NavigationRoutes.ForgotPasswordScreen.route) {
