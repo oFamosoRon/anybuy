@@ -39,7 +39,10 @@ import com.devira.anybuy.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen() {
+fun LoginScreen(
+    onForgotPasswordClick: () -> Unit,
+    onLoginClick: () -> Unit
+) {
 
     var email by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
@@ -94,7 +97,7 @@ fun LoginScreen() {
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.End
         ) {
-            TextButton(onClick = { /*TODO*/ }) {
+            TextButton(onClick = { onForgotPasswordClick() }) {
                 Text(
                     text = "Forgot password?",
                     style = TextStyle(color = Color.Black, fontWeight = FontWeight.Bold),
@@ -102,7 +105,7 @@ fun LoginScreen() {
             }
         }
         Button(
-            onClick = { /*TODO*/ },
+            onClick = { onLoginClick() },
             modifier = Modifier
                 .fillMaxWidth(),
             colors = ButtonDefaults.buttonColors(
@@ -119,7 +122,7 @@ fun LoginScreen() {
             modifier = Modifier.padding(top = 8.dp)
         )
         OutlinedButton(
-            onClick = { /*TODO*/ },
+            onClick = { onLoginClick() },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp, vertical = 4.dp),
