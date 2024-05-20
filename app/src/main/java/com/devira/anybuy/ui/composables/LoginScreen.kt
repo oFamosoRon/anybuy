@@ -7,6 +7,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -65,30 +66,7 @@ fun LoginScreen(
         Box(
             modifier = Modifier.fillMaxWidth(),
         ) {
-            Box(
-                modifier = Modifier
-                    .clip(CircleShape)
-                    .size(50.dp)
-                    .background(Color.White)
-                    .border(
-                        width = 1.dp,
-                        color = MaterialTheme.colorScheme.tertiaryContainer,
-                        shape = CircleShape
-                    )
-                    .align(Alignment.TopStart)
-                    .clickable {
-                        onNavigateBack()
-                    },
-                contentAlignment = Alignment.Center
-            ) {
-                Icon(
-                    Icons.Default.ArrowBack,
-                    contentDescription = "navigate back",
-                    modifier = Modifier.align(
-                        Alignment.Center
-                    )
-                )
-            }
+            NavigateBackButton(onNavigateBack)
             Image(
                 painter = painterResource(id = R.drawable.sign_in_png),
                 contentDescription = "any buy sign in logo",
