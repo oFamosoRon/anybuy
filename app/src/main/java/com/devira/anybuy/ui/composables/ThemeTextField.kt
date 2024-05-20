@@ -15,12 +15,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import androidx.constraintlayout.helper.widget.MotionPlaceholder
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-fun ThemeTextField(initialState: String, placeholder: String) {
+fun ThemeTextField(initialState: String, placeholder: String, isPassword: Boolean = false) {
     var textFieldState by rememberSaveable {
         mutableStateOf(initialState)
     }
@@ -37,7 +38,9 @@ fun ThemeTextField(initialState: String, placeholder: String) {
             containerColor = MaterialTheme.colorScheme.tertiaryContainer,
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
-            textColor = MaterialTheme.colorScheme.onTertiaryContainer
-        )
+            textColor = MaterialTheme.colorScheme.onTertiaryContainer,
+            cursorColor = Color.Black
+        ),
+        visualTransformation = if (isPassword) PasswordVisualTransformation(mask = '*') else VisualTransformation.None
     )
 }

@@ -78,7 +78,7 @@ fun LoginScreen(
         Spacer(modifier = Modifier.padding(16.dp))
         ThemeTextField(email, placeholder = "email address")
         Spacer(modifier = Modifier.padding(8.dp))
-        ThemeTextField(password, placeholder = "password")
+        ThemeTextField(password, placeholder = "password", isPassword = true)
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.End
