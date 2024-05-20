@@ -1,5 +1,6 @@
 package com.devira.anybuy.ui.composables
 
+import android.app.Activity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -14,9 +15,13 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -38,13 +43,16 @@ fun WelcomeScreen(
             painter = painterResource(id = R.drawable.logo),
             contentDescription = "any buy main logo",
             modifier = Modifier
-                .size(90.dp).weight(1F)
+                .size(90.dp)
+                .weight(1F)
         )
 
         Image(
             painter = painterResource(id = R.drawable.splash_screen_img),
             contentDescription = "any buy illustration",
-            modifier = Modifier.size(280.dp).weight(3F)
+            modifier = Modifier
+                .size(280.dp)
+                .weight(3F)
         )
 
         Column(
