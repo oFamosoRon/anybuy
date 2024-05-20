@@ -76,39 +76,9 @@ fun LoginScreen(
             )
         }
         Spacer(modifier = Modifier.padding(16.dp))
-        TextField(
-            value = email,
-            onValueChange = { newValue ->
-                email = newValue
-            },
-            placeholder = { Text(text = "Email address") },
-            modifier = Modifier
-                .fillMaxWidth()
-                .clip(RoundedCornerShape(10.dp)),
-            colors = TextFieldDefaults.textFieldColors(
-                containerColor = MaterialTheme.colorScheme.tertiaryContainer,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-                textColor = MaterialTheme.colorScheme.onTertiaryContainer
-            )
-        )
+        ThemeTextField(email, placeholder = "email address")
         Spacer(modifier = Modifier.padding(8.dp))
-        TextField(
-            value = password,
-            onValueChange = { newValue ->
-                password = newValue
-            },
-            placeholder = { Text(text = "Password") },
-            modifier = Modifier
-                .fillMaxWidth()
-                .clip(RoundedCornerShape(10.dp)),
-            colors = TextFieldDefaults.textFieldColors(
-                containerColor = MaterialTheme.colorScheme.tertiaryContainer,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-                textColor = MaterialTheme.colorScheme.onTertiaryContainer
-            )
-        )
+        ThemeTextField(password, placeholder = "password")
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.End
@@ -120,18 +90,7 @@ fun LoginScreen(
                 )
             }
         }
-        Button(
-            onClick = { onLoginClick() },
-            modifier = Modifier
-                .fillMaxWidth(),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = MaterialTheme.colorScheme.tertiary,
-                contentColor = MaterialTheme.colorScheme.onTertiary,
-            ),
-            contentPadding = PaddingValues(18.dp)
-        ) {
-            Text(text = "Log in".uppercase())
-        }
+        ThemeRoundedCornerFullWidthButton(label = "log in", onLoginClick)
         Text(
             text = "OR",
             style = TextStyle(color = MaterialTheme.colorScheme.onTertiaryContainer),

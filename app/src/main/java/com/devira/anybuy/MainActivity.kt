@@ -52,7 +52,7 @@ class MainActivity : ComponentActivity() {
                         )
                     }
                     composable(NavigationRoutes.ForgotPasswordScreen.route) {
-                        ForgotPasswordScreen()
+                        ForgotPasswordScreen(onNavigateBackClick = { navController.popBackStack() })
                     }
                     composable(NavigationRoutes.HomePageScreen.route) {
                         HomePagScreen()
