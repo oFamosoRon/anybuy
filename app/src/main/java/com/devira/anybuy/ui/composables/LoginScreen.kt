@@ -50,7 +50,8 @@ import com.devira.anybuy.R
 fun LoginScreen(
     onForgotPasswordClick: () -> Unit,
     onLoginClick: () -> Unit,
-    onNavigateBack: () -> Unit
+    onNavigateBack: () -> Unit,
+    onSignUpClick: () -> Unit
 ) {
 
     var email by rememberSaveable { mutableStateOf("") }
@@ -122,12 +123,16 @@ fun LoginScreen(
         }
         Row(
             modifier = Modifier
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .padding(top = 4.dp)
+                .clickable {
+                    onSignUpClick()
+                },
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.Top
         ) {
             Text(
-                text = "No account?".uppercase(),
+                text = "No account? ".uppercase(),
                 style = TextStyle(color = MaterialTheme.colorScheme.onTertiaryContainer)
             )
             Text(

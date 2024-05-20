@@ -13,6 +13,7 @@ import androidx.navigation.compose.rememberNavController
 import com.devira.anybuy.ui.composables.ForgotPasswordScreen
 import com.devira.anybuy.ui.composables.HomePagScreen
 import com.devira.anybuy.ui.composables.LoginScreen
+import com.devira.anybuy.ui.composables.SignUpScreen
 import com.devira.anybuy.ui.composables.WelcomeScreen
 import com.devira.anybuy.ui.theme.AnybuyTheme
 
@@ -48,7 +49,8 @@ class MainActivity : ComponentActivity() {
                         LoginScreen(
                             onForgotPasswordClick = { navController.navigate(route = NavigationRoutes.ForgotPasswordScreen.route) },
                             onLoginClick = { navController.navigate(route = NavigationRoutes.HomePageScreen.route) },
-                            onNavigateBack = { navController.popBackStack() }
+                            onNavigateBack = { navController.popBackStack() },
+                            onSignUpClick = { navController.navigate(route = NavigationRoutes.SignUpScreen.route) }
                         )
                     }
                     composable(NavigationRoutes.ForgotPasswordScreen.route) {
@@ -56,6 +58,9 @@ class MainActivity : ComponentActivity() {
                     }
                     composable(NavigationRoutes.HomePageScreen.route) {
                         HomePagScreen()
+                    }
+                    composable(NavigationRoutes.SignUpScreen.route) {
+                        SignUpScreen()
                     }
                 }
             }
