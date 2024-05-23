@@ -11,7 +11,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.devira.anybuy.ui.composables.ForgotPasswordScreen
-import com.devira.anybuy.ui.composables.HomePagScreen
+import com.devira.anybuy.ui.composables.MainContainer
 import com.devira.anybuy.ui.composables.LoginScreen
 import com.devira.anybuy.ui.composables.SignUpScreen
 import com.devira.anybuy.ui.composables.WelcomeScreen
@@ -48,7 +48,7 @@ class MainActivity : ComponentActivity() {
                     composable(NavigationRoutes.LoginScreen.route) {
                         LoginScreen(
                             onForgotPasswordClick = { navController.navigate(route = NavigationRoutes.ForgotPasswordScreen.route) },
-                            onLoginClick = { navController.navigate(route = NavigationRoutes.HomePageScreen.route) },
+                            onLoginClick = { navController.navigate(route = NavigationRoutes.MainContainer.route) },
                             onNavigateBack = { navController.popBackStack() },
                             onSignUpClick = { navController.navigate(route = NavigationRoutes.SignUpScreen.route) }
                         )
@@ -56,13 +56,13 @@ class MainActivity : ComponentActivity() {
                     composable(NavigationRoutes.ForgotPasswordScreen.route) {
                         ForgotPasswordScreen(onNavigateBackClick = { navController.popBackStack() })
                     }
-                    composable(NavigationRoutes.HomePageScreen.route) {
-                        HomePagScreen()
+                    composable(NavigationRoutes.MainContainer.route) {
+                        MainContainer()
                     }
                     composable(NavigationRoutes.SignUpScreen.route) {
                         SignUpScreen(
                             onNavigateBackClick = { navController.popBackStack() },
-                            onRegisterClick = { navController.navigate(NavigationRoutes.HomePageScreen.route) }
+                            onRegisterClick = { navController.navigate(NavigationRoutes.MainContainer.route) }
                         )
                     }
                 }
