@@ -1,12 +1,12 @@
 package com.devira.anybuy.ui.composables
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -22,6 +22,7 @@ import com.devira.anybuy.R
 @Composable
 fun MainContainer() {
     val navController = rememberNavController()
+    val pages = listOf(Page.Home, Page.Favourites, Page.Profile, Page.Buy)
     val selectedPage = remember { mutableStateOf<Page>(Page.Home) }
     Box(modifier = Modifier.fillMaxSize()) {
         NavHost(
@@ -32,7 +33,7 @@ fun MainContainer() {
                 HomeScreen()
             }
             composable(route = NavigationRoutes.FavouritesScreen.route) {
-                FavouritesScreen()
+                FavouritesScreen(onBackClick = { navController.popBackStack() })
             }
             composable(route = NavigationRoutes.BuyScreen.route) {
                 BuyScreen()
@@ -43,60 +44,89 @@ fun MainContainer() {
         }
         BottomAppBar(
             containerColor = MaterialTheme.colorScheme.primary,
-            actions = {
-                NavigationBarItem(
-                    selected = selectedPage.value is Page.Favourites,
-                    onClick = {
-                        selectedPage.value = Page.Favourites
-                        navController.navigate(NavigationRoutes.FavouritesScreen.route)
-                    },
-                    icon = {
-                        Icon(
-                            painterResource(id = R.drawable.heart),
-                            contentDescription = "favourites"
-                        )
-                    })
-                NavigationBarItem(
-                    selected = selectedPage.value is Page.Home,
-                    onClick = {
-                        selectedPage.value = Page.Home
-                        navController.navigate(NavigationRoutes.HomeScreen.route)
-                    },
-                    icon = {
-                        Icon(
-                            painterResource(id = R.drawable.home),
-                            contentDescription = "home"
-                        )
-                    })
-                NavigationBarItem(
-                    selected = selectedPage.value is Page.Profile,
-                    onClick = {
-                        selectedPage.value = Page.Profile
-                        navController.navigate(NavigationRoutes.ProfileScreen.route)
-                    },
-                    icon = {
-                        Icon(
-                            painterResource(id = R.drawable.profile),
-                            contentDescription = "profile"
-                        )
-                    })
-                NavigationBarItem(
-                    selected = selectedPage.value is Page.Buy,
-                    onClick = {
-                        selectedPage.value = Page.Buy
-                        navController.navigate(NavigationRoutes.BuyScreen.route)
-                    },
-                    icon = {
-                        Icon(
-                            painterResource(id = R.drawable.buy),
-                            contentDescription = "buy"
-                        )
-                    })
-            },
             modifier = Modifier
                 .align(Alignment.BottomCenter)
-                .background(MaterialTheme.colorScheme.primary)
-        )
+        ) {
+            pages.forEach { page ->
+                when (page) {
+                    is Page.Home -> {
+                        NavigationBarItem(
+                            selected = selectedPage.value is Page.Home,
+                            onClick = {
+                                selectedPage.value = Page.Home
+                                navController.navigate(NavigationRoutes.HomeScreen.route)
+                            },
+                            icon = {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.home),
+                                    contentDescription = "home screen"
+                                )
+                            },
+                            colors = NavigationBarItemDefaults.colors(
+                                indicatorColor = MaterialTheme.colorScheme.primary
+                            )
+                        )
+                    }
+
+                    is Page.Favourites -> {
+                        NavigationBarItem(
+                            selected = selectedPage.value is Page.Favourites,
+                            onClick = {
+                                selectedPage.value = Page.Favourites
+                                navController.navigate(NavigationRoutes.FavouritesScreen.route)
+                            },
+                            icon = {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.heart),
+                                    contentDescription = "favourites screen"
+                                )
+                            },
+                            colors = NavigationBarItemDefaults.colors(
+                                indicatorColor = MaterialTheme.colorScheme.primary
+                            )
+                        )
+                    }
+
+                    is Page.Buy -> {
+                        NavigationBarItem(
+                            selected = selectedPage.value is Page.Buy,
+                            onClick = {
+                                selectedPage.value = Page.Buy
+                                navController.navigate(NavigationRoutes.BuyScreen.route)
+                            },
+                            icon = {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.buy),
+                                    contentDescription = "Buy screen"
+                                )
+                            },
+                            colors = NavigationBarItemDefaults.colors(
+                                indicatorColor = MaterialTheme.colorScheme.primary
+                            )
+                        )
+                    }
+
+                    is Page.Profile -> {
+                        NavigationBarItem(
+                            selected = selectedPage.value is Page.Profile,
+                            onClick = {
+                                selectedPage.value = Page.Profile
+                                navController.navigate(NavigationRoutes.ProfileScreen.route)
+                            },
+                            icon = {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.profile),
+                                    contentDescription = "profile screen"
+                                )
+                            },
+                            colors = NavigationBarItemDefaults.colors(
+                                indicatorColor = MaterialTheme.colorScheme.primary
+                            )
+                        )
+                    }
+                }
+            }
+        }
     }
 }
 
