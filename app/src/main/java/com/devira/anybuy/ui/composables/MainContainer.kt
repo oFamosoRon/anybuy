@@ -22,7 +22,7 @@ import com.devira.anybuy.R
 @Composable
 fun MainContainer() {
     val navController = rememberNavController()
-    val pages = listOf(Page.Home, Page.Favourites, Page.Profile, Page.Buy)
+    val pages = listOf(Page.Favourites, Page.Home, Page.Profile)
     val selectedPage = remember { mutableStateOf<Page>(Page.Home) }
     Box(modifier = Modifier.fillMaxSize()) {
         NavHost(
@@ -35,11 +35,8 @@ fun MainContainer() {
             composable(route = NavigationRoutes.FavouritesScreen.route) {
                 FavouritesScreen(onBackClick = { navController.popBackStack() })
             }
-            composable(route = NavigationRoutes.BuyScreen.route) {
-                BuyScreen()
-            }
             composable(route = NavigationRoutes.ProfileScreen.route) {
-                ProfileScreen()
+                ProfileScreen(onBackClick = { navController.popBackStack() })
             }
         }
         BottomAppBar(
@@ -87,25 +84,6 @@ fun MainContainer() {
                         )
                     }
 
-                    is Page.Buy -> {
-                        NavigationBarItem(
-                            selected = selectedPage.value is Page.Buy,
-                            onClick = {
-                                selectedPage.value = Page.Buy
-                                navController.navigate(NavigationRoutes.BuyScreen.route)
-                            },
-                            icon = {
-                                Icon(
-                                    painter = painterResource(id = R.drawable.buy),
-                                    contentDescription = "Buy screen"
-                                )
-                            },
-                            colors = NavigationBarItemDefaults.colors(
-                                indicatorColor = MaterialTheme.colorScheme.primary
-                            )
-                        )
-                    }
-
                     is Page.Profile -> {
                         NavigationBarItem(
                             selected = selectedPage.value is Page.Profile,
@@ -133,6 +111,5 @@ fun MainContainer() {
 private sealed class Page() {
     object Home : Page()
     object Profile : Page()
-    object Buy : Page()
     object Favourites : Page()
 }
