@@ -1,4 +1,4 @@
-package com.devira.anybuy
+package com.devira.anybuy.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,13 +10,16 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.devira.anybuy.NavigationRoutes
 import com.devira.anybuy.ui.composables.ForgotPasswordScreen
 import com.devira.anybuy.ui.composables.MainContainer
 import com.devira.anybuy.ui.composables.LoginScreen
 import com.devira.anybuy.ui.composables.SignUpScreen
 import com.devira.anybuy.ui.composables.WelcomeScreen
 import com.devira.anybuy.ui.theme.AnybuyTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -8,22 +8,33 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.devira.anybuy.ui.MainViewModel
 import com.devira.anybuy.NavigationRoutes
 import com.devira.anybuy.R
 
+@JvmOverloads
 @Composable
-fun MainContainer() {
+fun MainContainer(
+    viewModel: MainViewModel = hiltViewModel()
+) {
+
     val navController = rememberNavController()
     val pages = listOf(Page.Favourites, Page.Home, Page.Profile)
     val selectedPage = remember { mutableStateOf<Page>(Page.Home) }
+
+    val state = viewModel.state.collectAsState()
+
     Box(modifier = Modifier.fillMaxSize()) {
         NavHost(
             navController = navController,
