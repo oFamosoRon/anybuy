@@ -24,10 +24,17 @@ class MainViewModel @Inject constructor(
             repository.getAllProducts().collect { resource ->
                 when (resource) {
                     is Resource.Success -> {
-                        _state.value = _state.value.copy(products = resource.data ?: emptyList())
+                        _state.value = _state.value.copy(
+                            products = resource.data ?: emptyList(),
+                            isLoadingProducts = false
+                        )
                     }
 
-                    else -> null
+                    else -> {
+                        _state.value = _state.value.copy(
+                            isLoadingProducts = true
+                        )
+                    }
                 }
             }
         }

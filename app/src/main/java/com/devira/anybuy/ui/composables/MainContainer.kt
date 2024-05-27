@@ -15,13 +15,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.devira.anybuy.ui.MainViewModel
 import com.devira.anybuy.NavigationRoutes
 import com.devira.anybuy.R
+import com.devira.anybuy.ui.MainViewModel
+import com.devira.anybuy.ui.composables.home.HomeScreen
 
 @JvmOverloads
 @Composable
@@ -41,7 +41,7 @@ fun MainContainer(
             startDestination = NavigationRoutes.HomeScreen.route
         ) {
             composable(route = NavigationRoutes.HomeScreen.route) {
-                HomeScreen()
+                HomeScreen(products = state.value.products, isLoading = state.value.isLoadingProducts)
             }
             composable(route = NavigationRoutes.FavouritesScreen.route) {
                 FavouritesScreen(onBackClick = { navController.popBackStack() })

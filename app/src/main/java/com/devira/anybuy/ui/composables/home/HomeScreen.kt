@@ -1,11 +1,10 @@
-package com.devira.anybuy.ui.composables
+package com.devira.anybuy.ui.composables.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,7 +13,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.List
@@ -28,8 +29,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -37,12 +36,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.devira.anybuy.R
-import com.devira.anybuy.ui.theme.GradientGray
-import com.devira.anybuy.ui.theme.LighterGray
+import com.devira.anybuy.model.Product
+import com.devira.anybuy.ui.composables.productsList.ItemComponent
+import com.devira.anybuy.ui.composables.productsList.ItemPlaceHolder
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    products: List<Product>,
+    isLoading: Boolean
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -111,33 +114,20 @@ fun HomeScreen() {
             }
         }
         Spacer(modifier = Modifier.padding(8.dp))
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(160.dp)
-                .shadow(elevation = 2.dp, shape = RoundedCornerShape(8.dp))
-                .clip(RoundedCornerShape(8.dp))
-                .background(
-                    brush = Brush.horizontalGradient(
-                        colors = listOf(LighterGray, GradientGray)
-                    ),
-                )
-        )
-        Spacer(modifier = Modifier.padding(8.dp))
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 100.dp)
-                .height(4.dp)
-                .clip(RoundedCornerShape(50.dp))
-                .background(MaterialTheme.colorScheme.tertiary)
-        )
-        LazyRow(
-            contentPadding = PaddingValues(8.dp),
+
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(2),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalArrangement = Arrangement.spacedBy(18.dp)
         ) {
-            items(20) { item ->
-                ItemComponent()
+            if (isLoading) {
+                items(8) {
+                    ItemPlaceHolder()
+                }
+            } else {
+                items(products) { product ->
+                    ItemComponent(product)
+                }
             }
         }
     }

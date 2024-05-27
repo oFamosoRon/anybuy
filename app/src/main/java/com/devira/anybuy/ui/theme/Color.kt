@@ -11,7 +11,6 @@ val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 
 //AnyBuy
-
 val Red = Color(0xFFC31700)
 val DarkRed = Color(0xFF9B1300)
 val Orange = Color(0xFFFF9701)
@@ -20,3 +19,7 @@ val LightGray = Color(0xFF3F414E)
 val SuperLightGray = Color(0xFFF2F3F7)
 val LighterGray = Color(0xFFA1A4B2)
 val GradientGray = Color(0xFFC4C4C4)
+
+// Whities
+val AntiFlashWhite = Color(0xFFECECEC)
+val WhiteSmoke = Color(0xFFF3F3F3)
