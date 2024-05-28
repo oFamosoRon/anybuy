@@ -4,5 +4,6 @@ import com.devira.anybuy.model.Product
 
 data class MainState(
     val products: List<Product> = emptyList(),
-    val isLoadingProducts: Boolean = false
+    val isLoadingProducts: Boolean = false,
+    val selectedProduct: Product? = null
 )

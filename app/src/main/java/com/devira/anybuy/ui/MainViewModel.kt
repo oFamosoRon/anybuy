@@ -1,8 +1,8 @@
 package com.devira.anybuy.ui
 
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.devira.anybuy.model.Product
 import com.devira.anybuy.repository.ProductsRepository
 import com.devira.anybuy.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -38,5 +38,13 @@ class MainViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    fun clearSelectedProduct() {
+        _state.value = _state.value.copy(selectedProduct = null)
+    }
+
+    fun updateSelectedProduct(product: Product) {
+        _state.value = _state.value.copy(selectedProduct = product)
     }
 }

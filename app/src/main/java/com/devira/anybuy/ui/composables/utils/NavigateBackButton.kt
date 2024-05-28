@@ -1,4 +1,4 @@
-package com.devira.anybuy.ui.composables
+package com.devira.anybuy.ui.composables.utils
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border

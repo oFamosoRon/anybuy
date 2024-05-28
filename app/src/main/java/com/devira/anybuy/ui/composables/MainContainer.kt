@@ -69,7 +69,8 @@ fun MainContainer(
                 HomeScreen(
                     products = state.value.products,
                     isLoading = state.value.isLoadingProducts,
-                    onClick = {
+                    onClick = { product ->
+                        viewModel.updateSelectedProduct(product)
                         isBottomNavBarVisible = false
                         navController.navigate(NavigationRoutes.ProductDetailsScreen.route)
                     })
@@ -81,10 +82,13 @@ fun MainContainer(
                 ProfileScreen(onBackClick = { navController.popBackStack() })
             }
             composable(route = NavigationRoutes.ProductDetailsScreen.route) {
-                ProductDetailsScreen(onBackClick = {
-                    isBottomNavBarVisible = true
-                    navController.popBackStack()
-                })
+                ProductDetailsScreen(
+                    viewModel = viewModel,
+                    onBackClick = {
+                        viewModel.clearSelectedProduct()
+                        isBottomNavBarVisible = true
+                        navController.popBackStack()
+                    })
             }
         }
 

@@ -23,6 +23,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.devira.anybuy.R
+import com.devira.anybuy.ui.composables.utils.NavigateBackButton
 
 @Composable
 fun ProfileScreen(

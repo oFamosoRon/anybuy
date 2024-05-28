@@ -35,8 +35,10 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.devira.anybuy.R
 import com.devira.anybuy.model.Product
+import com.devira.anybuy.ui.MainViewModel
 import com.devira.anybuy.ui.composables.productsList.ItemComponent
 import com.devira.anybuy.ui.composables.productsList.ItemPlaceHolder
 
@@ -45,7 +47,7 @@ import com.devira.anybuy.ui.composables.productsList.ItemPlaceHolder
 fun HomeScreen(
     products: List<Product>,
     isLoading: Boolean,
-    onClick: () -> Unit
+    onClick: (product: Product) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -128,7 +130,7 @@ fun HomeScreen(
             } else {
                 items(products) { product ->
                     ItemComponent(product) {
-                        onClick()
+                        onClick(product)
                     }
                 }
             }
