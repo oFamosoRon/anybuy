@@ -9,5 +9,5 @@ enum class NavigationRoutes(val route: String) {
     HomeScreen("home_screen_route"),
     FavouritesScreen("favourites_screen"),
     ProfileScreen("profile_screen"),
-    BuyScreen("buy_screen")
+    ProductDetailsScreen("product_details_screen"),
 }

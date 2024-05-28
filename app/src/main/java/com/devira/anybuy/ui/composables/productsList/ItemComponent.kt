@@ -1,6 +1,7 @@
 package com.devira.anybuy.ui.composables.productsList
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -31,7 +32,8 @@ import com.devira.anybuy.ui.theme.WhiteSmoke
 
 @Composable
 fun ItemComponent(
-    product: Product
+    product: Product,
+    onClick: () -> Unit
 ) {
     Card(
         shape = RoundedCornerShape(10.dp),
@@ -39,6 +41,9 @@ fun ItemComponent(
         modifier = Modifier
             .width(120.dp)
             .height(190.dp)
+            .clickable {
+                onClick()
+            }
     ) {
         Column(
             modifier = Modifier
@@ -98,5 +103,5 @@ fun ItemComponent(
 @Preview
 @Composable
 fun PreviewItemComponent() {
-    ItemComponent(Product())
+    ItemComponent(Product(), {})
 }

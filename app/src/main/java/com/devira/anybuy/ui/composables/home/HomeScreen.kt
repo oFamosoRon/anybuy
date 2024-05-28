@@ -44,7 +44,8 @@ import com.devira.anybuy.ui.composables.productsList.ItemPlaceHolder
 @Composable
 fun HomeScreen(
     products: List<Product>,
-    isLoading: Boolean
+    isLoading: Boolean,
+    onClick: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -126,7 +127,9 @@ fun HomeScreen(
                 }
             } else {
                 items(products) { product ->
-                    ItemComponent(product)
+                    ItemComponent(product) {
+                        onClick()
+                    }
                 }
             }
         }
