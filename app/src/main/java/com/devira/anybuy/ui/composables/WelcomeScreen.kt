@@ -5,6 +5,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -26,6 +27,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.devira.anybuy.R
 
 @Composable
@@ -51,10 +53,18 @@ fun WelcomeScreen(
             painter = painterResource(id = R.drawable.splash_screen_img),
             contentDescription = "any buy illustration",
             modifier = Modifier
-                .size(280.dp)
+                .size(250.dp)
                 .weight(3F)
         )
 
+        Text(
+            text = "Buy Anything You Want",
+            style = TextStyle(color = MaterialTheme.colorScheme.primary),
+            fontWeight = FontWeight.ExtraBold,
+            fontSize = 22.sp
+        )
+
+        Spacer(modifier = Modifier.padding(16.dp))
         Column(
             modifier = Modifier
                 .fillMaxWidth()
