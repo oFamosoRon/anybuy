@@ -18,6 +18,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.paint
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
@@ -37,7 +39,7 @@ fun MainContainer(
 
     val navController = rememberNavController()
     val pages = listOf(Page.Favourites, Page.Home, Page.Profile)
-    val selectedPage = remember { mutableStateOf<Page>(Page.Home) }
+    var selectedPage by remember { mutableStateOf<Page>(Page.Home) }
     var isBottomNavBarVisible by remember {
         mutableStateOf(true)
     }
@@ -102,16 +104,24 @@ fun MainContainer(
                     when (page) {
                         is Page.Home -> {
                             NavigationBarItem(
-                                selected = selectedPage.value is Page.Home,
+                                selected = selectedPage is Page.Home,
                                 onClick = {
-                                    selectedPage.value = Page.Home
+                                    selectedPage = Page.Home
                                     navController.navigate(NavigationRoutes.HomeScreen.route)
                                 },
                                 icon = {
-                                    Icon(
-                                        painter = painterResource(id = R.drawable.home),
-                                        contentDescription = "home screen"
-                                    )
+                                    if (selectedPage is Page.Home) {
+                                        Icon(
+                                            painter = painterResource(id = R.drawable.home),
+                                            contentDescription = "home screen",
+                                            tint = MaterialTheme.colorScheme.tertiary
+                                        )
+                                    } else {
+                                        Icon(
+                                            painter = painterResource(id = R.drawable.home),
+                                            contentDescription = "home screen"
+                                        )
+                                    }
                                 },
                                 colors = NavigationBarItemDefaults.colors(
                                     indicatorColor = MaterialTheme.colorScheme.primary
@@ -121,16 +131,25 @@ fun MainContainer(
 
                         is Page.Favourites -> {
                             NavigationBarItem(
-                                selected = selectedPage.value is Page.Favourites,
+                                selected = selectedPage is Page.Favourites,
                                 onClick = {
-                                    selectedPage.value = Page.Favourites
+                                    selectedPage = Page.Favourites
                                     navController.navigate(NavigationRoutes.FavouritesScreen.route)
                                 },
                                 icon = {
-                                    Icon(
-                                        painter = painterResource(id = R.drawable.heart),
-                                        contentDescription = "favourites screen"
-                                    )
+                                    if (selectedPage is Page.Favourites) {
+                                        Icon(
+                                            painter = painterResource(id = R.drawable.heart),
+                                            contentDescription = "favourites screen",
+                                            tint = MaterialTheme.colorScheme.tertiary
+                                        )
+                                    } else {
+                                        Icon(
+                                            painter = painterResource(id = R.drawable.heart),
+                                            contentDescription = "favourites screen"
+                                        )
+                                    }
+
                                 },
                                 colors = NavigationBarItemDefaults.colors(
                                     indicatorColor = MaterialTheme.colorScheme.primary
@@ -140,16 +159,24 @@ fun MainContainer(
 
                         is Page.Profile -> {
                             NavigationBarItem(
-                                selected = selectedPage.value is Page.Profile,
+                                selected = selectedPage is Page.Profile,
                                 onClick = {
-                                    selectedPage.value = Page.Profile
+                                    selectedPage = Page.Profile
                                     navController.navigate(NavigationRoutes.ProfileScreen.route)
                                 },
                                 icon = {
-                                    Icon(
-                                        painter = painterResource(id = R.drawable.profile),
-                                        contentDescription = "profile screen"
-                                    )
+                                    if (selectedPage is Page.Profile) {
+                                        Icon(
+                                            painter = painterResource(id = R.drawable.profile),
+                                            contentDescription = "profile screen",
+                                            tint = MaterialTheme.colorScheme.tertiary
+                                        )
+                                    } else {
+                                        Icon(
+                                            painter = painterResource(id = R.drawable.profile),
+                                            contentDescription = "profile screen"
+                                        )
+                                    }
                                 },
                                 colors = NavigationBarItemDefaults.colors(
                                     indicatorColor = MaterialTheme.colorScheme.primary
